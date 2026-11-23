@@ -263,16 +263,58 @@ function LetterChapter({ opened, open, next }) {
 }
 
 function Finale({ replay }) {
-  return <section className="scene finale-scene" aria-label="Belated happy birthday Tiya, from Mayank">
+  const [answer, setAnswer] = useState(null)
+  const [noPosition, setNoPosition] = useState({ x: 0, y: 0 })
+
+  const moveNoButton = () => {
+    setNoPosition({
+      x: Math.round((Math.random() - 0.5) * 260),
+      y: Math.round((Math.random() - 0.5) * 150),
+    })
+  }
+
+  const yesConfetti = Array.from({ length: 55 }, (_, i) => ({
+    id: i,
+    left: (i * 37) % 100,
+    drift: ((i * 23) % 180) - 90,
+    spin: ((i * 71) % 720) - 360,
+    delay: (i % 14) * 0.08,
+    duration: 3.2 + (i % 6) * 0.25,
+    round: i % 4 === 0,
+    color: COLORS[i % COLORS.length],
+  }))
+
+  return <section className="scene finale-scene" aria-label="Mayank's final question for Tiya">
+    {answer === 'yes' && <Confetti pieces={yesConfetti} />}
     <div className="finale-aura" />
     <div className="finale-content">
-      <div className="finale-photo"><img src={portrait} alt="A portrait of Tiya" /><span className="finale-photo-star star-a">✦</span><span className="finale-photo-star star-b">✳</span><span className="finale-photo-star star-c">♡</span></div>
-      <p className="eyebrow">THE CELEBRATION MAY BE LATE, BUT MAYANK'S LOVE ISN'T</p>
-      <h1>Belated Happy Birthday, <em>{PERSON.recipient}!</em></h1>
-      <p className="finale-description">Mayank hopes this new chapter is filled with beautiful moments, impossible dreams coming true, and a thousand reasons to smile.</p>
-      <p className="finale-handwritten">You deserve all of the magic. ✨</p>
-      <div className="signature"><span>All Mayank's love,</span><strong>{PERSON.sender} ♡</strong></div>
-      <button className="replay-button" type="button" onClick={replay}>↺ &nbsp; Experience Mayank's magic again</button>
+      {answer !== 'yes' ? <>
+        <div className="finale-question-heart" aria-hidden="true">♥</div>
+        <p className="eyebrow">ONE VERY IMPORTANT QUESTION</p>
+        <h1>Do you <em>also</em> like Mayank?</h1>
+        <p className="finale-description">Choose carefully — Mayank has been waiting to hear this. ♡</p>
+        <div className="answer-buttons">
+          <button type="button" className="yes-button" onClick={() => setAnswer('yes')}>Yes, I do ♡</button>
+          <button
+            type="button"
+            className="no-button"
+            style={{ transform: `translate(${noPosition.x}px, ${noPosition.y}px)` }}
+            onMouseEnter={moveNoButton}
+            onPointerEnter={moveNoButton}
+            onClick={moveNoButton}
+          >No</button>
+        </div>
+      </> : <>
+        <div className="finale-love-burst" aria-hidden="true"><span>♥</span><i>✦</i><i>♡</i><i>✧</i></div>
+        <p className="eyebrow">MAYANK ALWAYS KNEW IT</p>
+        <h1>I always knew <em>it.</em></h1>
+        <p className="finale-handwritten">And Tiya, you have made this birthday feel magical.</p>
+        <div className="finale-photo"><img src={portrait} alt="A portrait of Tiya" /><span className="finale-photo-star star-a">✦</span><span className="finale-photo-star star-b">✳</span><span className="finale-photo-star star-c">♡</span></div>
+        <p className="finale-description">Mayank wishes Tiya a beautiful year ahead, filled with soft mornings, loud laughter, impossible dreams coming true, and a thousand reasons to smile.</p>
+        <p className="finale-handwritten">Once again, belated happy birthday, Tiya! ✨</p>
+        <div className="signature"><span>Forever yours,</span><strong>{PERSON.sender} ♡</strong></div>
+        <button className="replay-button" type="button" onClick={replay}>↺ &nbsp; Experience Mayank's magic again</button>
+      </>}
     </div>
   </section>
 }
@@ -379,7 +421,7 @@ export default function App() {
       {chapter === 'balloons' && <BalloonChapter popped={popped} lastPopped={lastPopped} pop={index => { setPopped(values => values.includes(index) ? values : [...values, index]); setLastPopped(index) }} next={nextChapter} />}
       {chapter === 'gallery' && <Gallery index={photoIndex} setIndex={setPhotoIndex} next={nextChapter} />}
       {chapter === 'letter' && <LetterChapter opened={letterOpened} open={() => setLetterOpened(true)} next={nextChapter} />}
-      {chapter === 'final' && <><Confetti pieces={confetti} /><Finale replay={replay} /></>}
+      {chapter === 'final' && <Finale replay={replay} />}
       {chapter === 'surprise' && <SurpriseGate open={() => { playMusic(); setChapter('intro') }} />}
     </main>
   )
