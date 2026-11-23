@@ -380,135 +380,42 @@ h1 em,h2 em { font-weight: 400; color: var(--accent); }
 @keyframes gate-breathe { 0%,100% { transform: scale(.88); opacity: .55; } 50% { transform: scale(1.08); opacity: .85; } }
 @keyframes seal-float { 0%,100% { translate: 0 0; } 50% { translate: 0 -9px; } }
 
-/* Mobile-first viewport lock: no accidental document scroll and no cut-off screens. */
-@media (max-width: 650px) {
-  html, body, #root { width: 100%; max-width: 100%; height: 100%; overflow-x: hidden; }
-  body { overflow-y: hidden; overscroll-behavior: none; }
-  .app-shell { height: 100dvh; min-height: 100dvh; max-height: 100dvh; overflow: hidden; }
-  .scene {
-    width: calc(100% - 28px);
-    height: calc(100dvh - 62px);
-    min-height: 0;
-    max-height: calc(100dvh - 62px);
-    overflow: hidden;
-  }
-  .top-bar { height: 62px; flex-shrink: 0; }
-  .surprise-gate {
-    height: 100dvh;
-    min-height: 100dvh;
-    max-height: 100dvh;
-    overflow: hidden;
-  }
-  .gate-content {
-    width: calc(100% - 32px);
-    max-height: 100dvh;
-    padding: max(12px, env(safe-area-inset-top)) 0 max(12px, env(safe-area-inset-bottom));
-  }
-  .gate-eyebrow { margin-bottom: 12px; }
-  .gift-seal { width: 112px; height: 112px; margin-bottom: 14px; }
-  .ribbon-one { left: 49px; }
-  .ribbon-two { top: 49px; }
-  .gate-content h1 { margin-bottom: 10px; line-height: 1; }
-  .gate-content > p:not(.gate-eyebrow) { margin-bottom: 14px; line-height: 1.55; }
-  .gate-open-button { min-height: 48px; }
-  .gate-note { margin-top: 10px; }
-
-  .intro-scene {
-    display: grid;
-    grid-template-rows: minmax(0, 1fr) 36%;
-    gap: 0;
-    padding: 8px 0 10px;
-  }
-  .hero-copy { display: flex; flex-direction: column; justify-content: center; min-height: 0; }
-  .script-intro { margin: 8px 0 2px; font-size: clamp(32px, 9vw, 38px); }
-  .hero-copy h1 { margin-bottom: 8px; font-size: clamp(38px, 10.5vw, 48px); }
-  .hero-description { margin-bottom: 13px; line-height: 1.45; }
-  .signed-line { margin-top: 9px; }
-  .hero-art { width: 100%; height: 100%; min-height: 0; margin: 0 auto; }
-  .sun-aura { width: 280px; height: 280px; }
-  .hero-photo-back { width: 128px; height: 175px; top: 38px; }
-  .hero-photo-front { width: 150px; height: 206px; top: 18px; }
-
-  .garden-scene {
-    height: calc(100dvh - 62px);
-    display: grid;
-    grid-template-rows: auto minmax(0, 1fr);
-    padding: 8px 0 12px;
-  }
-  .section-copy h2 { margin: 8px auto 8px; font-size: clamp(34px, 9vw, 44px); }
-  .section-copy > p:not(.eyebrow,.tiny-instruction,.success-note) { margin-bottom: 9px; }
-  .growth-dots { margin-bottom: 8px; }
-  .tiny-instruction { margin-top: 7px; }
-  .tree-container { height: 100%; min-height: 0; }
-
-  .centered-scene { justify-content: center; padding: 8px 0 12px; }
-  .center-heading { margin: 7px 0 6px; font-size: clamp(34px, 9vw, 44px); }
-  .section-subheading { margin-bottom: 7px; line-height: 1.45; }
-  .cake-scene { width: 310px; height: 245px; transform: scale(.72); margin: -38px auto -42px; }
-  .balloon-field { height: 230px; margin: 4px auto 0; }
-  .balloon-wrap { scale: .64; }
-  .wish-note { bottom: 3px; }
-  .balloon-progress { margin: 0 0 2px; }
-  .centered-scene .pill-button { margin-top: 6px; }
-
-  .photo-carousel { height: min(230px, 34dvh); margin-top: 2px; }
-  .polaroid { width: 170px; height: 218px; top: 4px; padding: 6px 6px 24px; }
-  .polaroid span { font-size: 17px; padding-top: 4px; }
-  .carousel-controls { margin-top: 2px; }
-  .gallery-caption { margin: 7px 0 0; line-height: 1.3; }
-  .gallery-scene .pill-button { margin-top: 7px; }
-
-  .letter-scene { justify-content: flex-start; padding-top: 8px; }
-  .letter-scene .center-heading { font-size: clamp(32px, 8.5vw, 40px); }
-  .envelope-button { width: 280px; height: 180px; margin: 5px auto 0; transform: scale(.82); transform-origin: center; }
-  .envelope-button:hover { transform: scale(.82) translateY(-4px); }
-  .text-button { margin-top: -20px; }
-  .letter-open .center-heading { margin: 5px 0 8px; }
-  .letter-paper { width: min(360px, 100%); max-height: calc(100dvh - 210px); padding: 16px 19px 12px; }
-  .letter-decoration { margin-bottom: 5px; font-size: 7px; }
-  .letter-paper h3 { margin-bottom: 5px; font-size: 27px; }
-  .letter-paper p { margin-bottom: 5px; font-size: 9.5px; line-height: 1.45; }
-  .letter-paper .letter-signoff { margin-top: 7px; line-height: 1.35; }
-  .letter-signoff strong { font-size: 24px; }
-  .letter-open .pill-button { margin-top: 7px; }
-
-  .finale-scene { justify-content: center; padding: 7px 0 10px; }
-  .finale-photo { width: 118px; height: 132px; margin-bottom: 8px; }
-  .finale-scene .eyebrow { margin-bottom: 5px; }
-  .finale-content h1 { margin-bottom: 7px; font-size: clamp(44px, 11vw, 56px); }
-  .finale-description { margin-bottom: 5px; line-height: 1.45; }
-  .finale-handwritten { margin-bottom: 7px; font-size: 22px; }
-  .signature { font-size: 11px; }
-  .signature strong { font-size: 27px; }
-  .replay-button { margin-top: 8px; }
+@media (max-width: 900px) {
+  .scene { width: min(calc(100% - 50px), 700px); }
+  .site-header,.site-footer { width: calc(100% - 50px); }
+  .intro-scene { grid-template-columns: 1.03fr .97fr; }
+  .hero-copy { padding-left: 0; }
+  .hero-copy h1 { font-size: clamp(53px, 6.6vw, 74px); }
+  .hero-art { transform: scale(.78); transform-origin: center; margin-left: -50px; margin-right: -50px; }
+  .garden-scene { grid-template-columns: 1fr 1fr; }
+  .section-copy { padding-left: 0; }
+  .section-copy h2 { font-size: 53px; }
+  .tree-container { min-height: 420px; }
 }
-
-@media (max-width: 650px) and (max-height: 700px) {
-  .gate-eyebrow { display: none; }
-  .gift-seal { width: 86px; height: 86px; margin-bottom: 10px; border-radius: 24px; }
-  .ribbon-one { width: 12px; left: 37px; }
-  .ribbon-two { height: 12px; top: 37px; }
-  .gift-heart { width: 38px; height: 38px; font-size: 21px; }
-  .gate-content h1 { font-size: 36px; }
-  .gate-content > p:not(.gate-eyebrow) { margin-bottom: 9px; font-size: 11px; }
-  .gate-open-button { min-height: 44px; padding: 10px 18px; }
-  .gate-note { display: none; }
-
-  .hero-copy .eyebrow { display: none; }
-  .script-intro { font-size: 30px; }
-  .hero-copy h1 { font-size: 36px; }
-  .hero-description { font-size: 11px; margin-bottom: 8px; }
-  .signed-line { display: none; }
-  .hero-art { height: 205px; }
-  .hero-photo-back { width: 106px; height: 148px; }
-  .hero-photo-front { width: 125px; height: 170px; }
-
-  .section-copy h2 { font-size: 32px; }
-  .section-copy > p:not(.eyebrow,.tiny-instruction,.success-note) { font-size: 11px; }
-  .tree-container { max-height: 210px; }
-  .cake-scene { transform: scale(.58); margin: -52px auto -56px; }
-  .balloon-field { height: 190px; }
-  .photo-carousel { height: 188px; }
-  .polaroid { width: 145px; height: 180px; }
-  .letter-paper { max-height: calc(100dvh - 190px); }
+@media (max-width: 650px) {
+  .top-bar { width: calc(100% - 36px); height: 62px; }
+  .top-bar .brand-mark { max-width: 65%; }
+  .chapter-nav { bottom: max(10px, env(safe-area-inset-bottom)); gap: 5px; }
+  .chapter-nav button { width: 38px; height: 38px; }
+  .scene { min-height: calc(100dvh - 62px); }
+  .pill-button, .text-button, .replay-button { min-height: 48px; }
+  .gate-eyebrow { margin-bottom: 16px; font-size: 9px; }
+  .gift-seal { width: 118px; height: 118px; border-radius: 31px; margin-bottom: 18px; }
+  .ribbon-one { width: 15px; left: 51px; }
+  .ribbon-two { height: 15px; top: 51px; }
+  .gift-heart { width: 48px; height: 48px; font-size: 27px; }
+  .gate-content h1 { font-size: clamp(41px, 12vw, 58px); }
+  .gate-content > p:not(.gate-eyebrow) { max-width: 320px; font-size: 12px; padding: 0 8px; }
+}
+@media (max-width: 370px) {
+  .brand-mark { font-size: 10px; }
+  .hero-art { height: 310px; }
+  .hero-photo-back { left: 12%; }
+  .hero-photo-front { left: 39%; }
+  .envelope-button { transform: scale(.86); margin: -1px auto -17px; }
+  .envelope-button:hover { transform: scale(.86) translateY(-3px); }
+  .balloon-wrap { scale: .67; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
