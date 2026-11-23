@@ -337,6 +337,12 @@ export default function App() {
     color: COLORS[i % COLORS.length],
   }))
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+  }, [chapter])
+
   return (
     <main className="app-shell">
       {chapter !== 'surprise' && <NightSky light={chapter === 'intro'} />}
