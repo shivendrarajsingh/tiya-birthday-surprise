@@ -419,3 +419,107 @@ h1 em,h2 em { font-weight: 400; color: var(--accent); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+
+/* Extra romantic atmosphere for the desktop experience. */
+.romance-petals {
+  position: fixed;
+  inset: 0;
+  z-index: 18;
+  pointer-events: none;
+  overflow: hidden;
+}
+.romance-petals span {
+  position: absolute;
+  top: -42px;
+  font-family: Georgia, serif;
+  font-size: var(--petal-size);
+  color: rgba(227, 137, 167, .58);
+  text-shadow: 0 0 12px rgba(255, 218, 229, .72);
+  animation-name: romance-petal-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes romance-petal-fall {
+  0% { opacity: 0; transform: translate3d(0,-30px,0) rotate(0deg); }
+  10% { opacity: .85; }
+  52% { transform: translate3d(38px,52vh,0) rotate(190deg); }
+  92% { opacity: .7; }
+  100% { opacity: 0; transform: translate3d(-24px,112vh,0) rotate(410deg); }
+}
+.desktop-romance-glow {
+  position: fixed;
+  z-index: 17;
+  left: 0;
+  bottom: 0;
+  width: 420px;
+  height: 420px;
+  pointer-events: none;
+  transform: translate(-55%, 55%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 177, 201, .15), transparent 68%);
+  animation: desktop-glow-drift 12s ease-in-out infinite alternate;
+}
+@keyframes desktop-glow-drift {
+  from { margin-left: 0; margin-bottom: 0; }
+  to { margin-left: 72vw; margin-bottom: 28vh; }
+}
+.scene {
+  animation: chapter-romance-reveal .85s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes chapter-romance-reveal {
+  0% { opacity: 0; transform: translateY(18px) scale(.985); filter: blur(4px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+.hero-copy, .section-copy, .finale-content {
+  animation: soft-copy-arrive 1.05s .12s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes soft-copy-arrive {
+  from { opacity: 0; transform: translateX(-22px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.hero-art, .tree-container, .finale-photo {
+  animation: soft-art-arrive 1.15s .18s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes soft-art-arrive {
+  from { opacity: 0; transform: translateY(24px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.gift-seal::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 1px solid rgba(255, 226, 235, .72);
+  border-radius: 44px;
+  animation: seal-ripple 2.8s ease-out infinite;
+}
+@keyframes seal-ripple {
+  0% { transform: scale(.88); opacity: 0; }
+  35% { opacity: .8; }
+  100% { transform: scale(1.28); opacity: 0; }
+}
+.gate-open-button, .pill-button, .replay-button {
+  position: relative;
+  overflow: hidden;
+}
+.gate-open-button::after, .pill-button::after, .replay-button::after {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: -55%;
+  width: 38%;
+  height: 160%;
+  transform: rotate(18deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.42), transparent);
+  transition: left .75s ease;
+}
+.gate-open-button:hover::after, .pill-button:hover::after, .replay-button:hover::after { left: 125%; }
+.chapter-nav button, .round-arrow, .carousel-dots button, .growth-dots span {
+  transition: transform .28s cubic-bezier(.2,1.3,.3,1), background .28s, border-color .28s, color .28s;
+}
+.chapter-nav button:hover, .round-arrow:hover { transform: translateY(-3px) scale(1.08); }
+.balloon-wrap { animation: balloon-drift 3.1s ease-in-out infinite alternate, balloon-glow 4s ease-in-out infinite; }
+@keyframes balloon-glow { 0%,100% { filter: drop-shadow(0 0 0 rgba(255,184,207,0)); } 50% { filter: drop-shadow(0 10px 13px rgba(255,184,207,.2)); } }
+.polaroid-current { animation: polaroid-breathe 5.2s ease-in-out infinite; }
+@keyframes polaroid-breathe { 0%,100% { transform: translateX(-50%) rotate(-2deg) scale(1); } 50% { transform: translateX(-50%) rotate(-1deg) scale(1.015); } }
+.envelope-button { animation: envelope-whisper 3.8s ease-in-out infinite; }
+@keyframes envelope-whisper { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-7px) rotate(-1deg); } }

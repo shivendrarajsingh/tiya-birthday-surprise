@@ -296,6 +296,23 @@ function SurpriseGate({ open }) {
   </section>
 }
 
+function RomanceEffects() {
+  const petals = Array.from({ length: 18 }, (_, i) => ({
+    id: i,
+    left: (i * 37) % 100,
+    delay: -(i * 1.23) % 12,
+    duration: 9 + (i % 5) * 1.5,
+    size: 8 + (i % 4) * 3,
+  }))
+
+  return <>
+    <div className="romance-petals" aria-hidden="true">
+      {petals.map(petal => <span key={petal.id} style={{ left: `${petal.left}%`, '--petal-size': `${petal.size}px`, animationDelay: `${petal.delay}s`, animationDuration: `${petal.duration}s` }}>♡</span>)}
+    </div>
+    <div className="desktop-romance-glow" aria-hidden="true" />
+  </>
+}
+
 export default function App() {
   const [chapter, setChapter] = useState('surprise')
   const [musicOn, setMusicOn] = useState(true)
@@ -339,6 +356,7 @@ export default function App() {
 
   return (
     <main className="app-shell">
+      <RomanceEffects />
       {chapter !== 'surprise' && <NightSky light={chapter === 'intro'} />}
       {chapter !== 'surprise' && <header className="top-bar">
         <div className="brand-mark"><HeartIcon filled size={16} /> for <strong>{PERSON.recipient}</strong></div>
