@@ -381,23 +381,6 @@ export default function App() {
       {chapter === 'letter' && <LetterChapter opened={letterOpened} open={() => setLetterOpened(true)} next={nextChapter} />}
       {chapter === 'final' && <><Confetti pieces={confetti} /><Finale replay={replay} /></>}
       {chapter === 'surprise' && <SurpriseGate open={() => { playMusic(); setChapter('intro') }} />}
-
-      {chapter !== 'intro' && chapter !== 'surprise' && (
-        <nav className="chapter-nav" aria-label="Birthday surprise chapters">
-          {CHAPTERS.map(([id, label], index) => (
-            <button
-              key={id}
-              type="button"
-              className={id === chapter ? 'active' : index < chapterIndex ? 'visited' : ''}
-              onClick={() => setChapter(id)}
-              aria-label={`Go to chapter ${index + 1}: ${label}`}
-              aria-current={id === chapter ? 'step' : undefined}
-            >
-              <span>{index + 1}</span>
-            </button>
-          ))}
-        </nav>
-      )}
     </main>
   )
 }
