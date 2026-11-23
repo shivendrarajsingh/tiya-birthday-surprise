@@ -571,11 +571,15 @@ h1 em,h2 em { font-weight: 400; color: var(--accent); }
 }
 .yes-button:hover { transform: translateY(-4px) scale(1.04); box-shadow: 0 22px 44px rgba(223, 107, 150, .38); }
 .no-button {
-  border: 1px solid rgba(255, 215, 229, .38);
-  color: #f8dfe9;
-  background: rgba(255,255,255,.08);
+  position: relative;
+  z-index: 3;
+  border: 2px solid rgba(255, 193, 211, .9);
+  color: #fff2f7;
+  background: linear-gradient(145deg, #7e4d70, #4e2d48);
+  box-shadow: 0 12px 28px rgba(32, 10, 28, .28), inset 0 1px 0 rgba(255,255,255,.16);
   backdrop-filter: blur(8px);
   will-change: transform;
+  opacity: 1;
 }
 .finale-love-burst {
   position: relative;

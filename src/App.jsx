@@ -267,9 +267,10 @@ function Finale({ replay }) {
   const [noPosition, setNoPosition] = useState({ x: 0, y: 0 })
 
   const moveNoButton = () => {
+    const smallScreen = window.innerWidth < 650
     setNoPosition({
-      x: Math.round((Math.random() - 0.5) * 260),
-      y: Math.round((Math.random() - 0.5) * 150),
+      x: Math.round((Math.random() - 0.5) * (smallScreen ? 80 : 150)),
+      y: Math.round((Math.random() - 0.5) * (smallScreen ? 54 : 80)),
     })
   }
 
